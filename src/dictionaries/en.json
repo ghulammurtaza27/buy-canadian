@@ -1,0 +1,36 @@
+{
+  "hero": {
+    "title": "Buy Canadian",
+    "subtitle": "Support local businesses and make informed shopping choices",
+    "description": "In response to recent US tariffs, it's more important than ever to support Canadian products and strengthen our economy."
+  },
+  "features": {
+    "local": {
+      "title": "Support Local",
+      "description": "Every Canadian purchase strengthens our local communities and economy"
+    },
+    "quality": {
+      "title": "Quality Products",
+      "description": "Canadian products are known for their high quality and strict standards"
+    },
+    "fairTrade": {
+      "title": "Fair Trade",
+      "description": "Support fair labor practices and ethical manufacturing"
+    }
+  },
+  "stats": {
+    "title": "Did You Know?",
+    "manufacturing": {
+      "number": "1.7M+",
+      "label": "Jobs in Manufacturing"
+    },
+    "gdp": {
+      "number": "10%",
+      "label": "of Canada's GDP"
+    },
+    "sales": {
+      "number": "$354B",
+      "label": "Annual Manufacturing Sales"
+    }
+  }
+} 

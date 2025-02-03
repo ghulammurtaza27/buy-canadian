@@ -1,0 +1,36 @@
+{
+  "hero": {
+    "title": "Achetez Canadien",
+    "subtitle": "Soutenez les entreprises locales et faites des choix d'achat éclairés",
+    "description": "En réponse aux récents tarifs américains, il est plus important que jamais de soutenir les produits canadiens et de renforcer notre économie."
+  },
+  "features": {
+    "local": {
+      "title": "Soutien Local",
+      "description": "Chaque achat canadien renforce nos communautés locales et notre économie"
+    },
+    "quality": {
+      "title": "Produits de Qualité",
+      "description": "Les produits canadiens sont reconnus pour leur haute qualité et leurs normes strictes"
+    },
+    "fairTrade": {
+      "title": "Commerce Équitable",
+      "description": "Soutenez des pratiques de travail équitables et une fabrication éthique"
+    }
+  },
+  "stats": {
+    "title": "Le Saviez-Vous?",
+    "manufacturing": {
+      "number": "1.7M+",
+      "label": "Emplois en Fabrication"
+    },
+    "gdp": {
+      "number": "10%",
+      "label": "du PIB Canadien"
+    },
+    "sales": {
+      "number": "354G$",
+      "label": "Ventes Annuelles en Fabrication"
+    }
+  }
+} 
