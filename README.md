@@ -1,6 +1,15 @@
 # Buy Canadian 🍁
 
+<div align="center">
+
 [![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://buy-canadian.vercel.app/)
+[![Next.js](https://img.shields.io/badge/Built%20with-Next.js%2014-black?style=for-the-badge&logo=next.js)](https://nextjs.org)
+[![TypeScript](https://img.shields.io/badge/Typed%20with-TypeScript-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org)
+[![TailwindCSS](https://img.shields.io/badge/Styled%20with-TailwindCSS-06B6D4?style=for-the-badge&logo=tailwindcss)](https://tailwindcss.com)
+
+</div>
+
+
 
 A web application helping consumers identify and support Canadian products.
 
@@ -61,4 +70,8 @@ The application is deployed and available at [buy-canadian.vercel.app](https://b
 
 ---
 
-Made with ❤️ in Canada 🍁
+<div align="center">
+
+### Made with ❤️ in Canada 🍁
+
+</div>
