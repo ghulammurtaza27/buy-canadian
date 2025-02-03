@@ -1,5 +1,3 @@
-
-
 <div align="center">
 
 # Buy Canadian 🍁
@@ -13,7 +11,10 @@
 
 
 
-A web application helping consumers identify and support Canadian products.
+A web application to help Canadians make informed shopping choices and support local businesses.
+
+![Buy Canadian App](public/image.png)
+
 
 🔗 [Try it live](https://buy-canadian.vercel.app/)
 
