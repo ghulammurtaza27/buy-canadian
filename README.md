@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Buy Canadian 🍁
 
-## Getting Started
+[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://buy-canadian.vercel.app/)
 
-First, run the development server:
+A web application helping consumers identify and support Canadian products.
 
-```bash
+🔗 [Try it live](https://buy-canadian.vercel.app/)
+
+## ✨ Features
+
+- 🔍 Smart Search - Find products and their origin instantly
+- 🌐 Bilingual - Full English and French language support
+- 🌙 Dark Mode - Easy on the eyes, day or night
+- 📱 Responsive - Perfect on desktop, tablet, and mobile
+- 🏭 Origin Tracking - Know where products are manufactured
+- 🏢 Ownership Info - Identify Canadian-owned companies
+- 💾 Search History - Track your recent searches
+
+## 🚀 About
+
+In response to recent US tariffs, supporting Canadian products has never been more crucial. Buy Canadian helps consumers make informed choices that strengthen our local economy.
+
+## 📊 Impact on Canadian Economy
+
+- 👥 1.7M+ Jobs in Manufacturing
+- 📈 10% of Canada's GDP
+- 💰 $354B Annual Manufacturing Sales
+
+## 🛠️ Tech Stack
+
+- Framework: Next.js 14 (App Router)
+- Language: TypeScript
+- Styling: TailwindCSS
+- Data: OpenFoodFacts API
+- Deployment: Vercel
+
+## 🌟 Getting Started
+
+1. Clone the repository
+2. Install dependencies
+3. Run the development server
+
+## Clone the repository
+git clone https://github.com/yourusername/buy-canadian.git
+## Install dependencies
+npm install
+## Start development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🤝 Contributing
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📝 License
 
-## Learn More
+MIT License - see LICENSE file for details
 
-To learn more about Next.js, take a look at the following resources:
+## 🚀 Deployment
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The application is deployed and available at [buy-canadian.vercel.app](https://buy-canadian.vercel.app/)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Made with ❤️ in Canada 🍁
