@@ -28,7 +28,7 @@ interface ProductSearchProps {
 
 const MAX_RECENT_SEARCHES = 5
 
-export default function ProductSearch({ lang }: ProductSearchProps) {
+export default function ProductSearch() {
   const [query, setQuery] = useState("")
   const [isScanning, setIsScanning] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -64,7 +64,7 @@ export default function ProductSearch({ lang }: ProductSearchProps) {
       setCurrentFact(prev => (prev + 1) % CANADA_US_FACTS.length)
     }, 3000)
     
-    router.push(`/${lang}/results?query=${encodeURIComponent(query.trim())}`)
+    router.push(`/results?query=${encodeURIComponent(query.trim())}`)
     
     // Cleanup interval if component unmounts
     return () => {
@@ -82,7 +82,7 @@ export default function ProductSearch({ lang }: ProductSearchProps) {
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
               <Input
                 type="text"
-                placeholder={lang === "fr" ? "Rechercher des produits..." : "Search products..."}
+                placeholder="Search products..."
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 className={cn(

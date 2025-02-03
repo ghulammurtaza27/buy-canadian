@@ -1,8 +1,14 @@
+import type React from "react"
+import type { Metadata } from "next"
+import { Card, CardContent } from "../components/ui/card"
 import ProductSearch from "../components/ProductSearch"
 import RecentSearches from "../components/RecentSearches"
 import { MapPin, ShoppingBag, HeartHandshake, MapIcon as Maple } from "lucide-react"
-import { Card, CardContent } from "@/components/ui/card"
-import type React from "react" // Import React
+
+export const metadata: Metadata = {
+  title: 'Buy Canadian',
+  description: 'Find and support Canadian products',
+}
 
 export default function Home() {
   return (
@@ -38,32 +44,38 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 mb-12">
           <FeatureCard
             icon={<MapPin className="w-6 h-6" />}
-            title="Support Local"
-            description="Every Canadian purchase strengthens our local communities and economy"
+            title="Local Support"
+            description="Support Canadian businesses and manufacturers"
           />
           <FeatureCard
             icon={<ShoppingBag className="w-6 h-6" />}
             title="Quality Products"
-            description="Canadian products are known for their high quality and strict standards"
+            description="Find high-quality Canadian-made goods"
           />
           <FeatureCard
             icon={<HeartHandshake className="w-6 h-6" />}
             title="Fair Trade"
-            description="Support fair labor practices and ethical manufacturing"
+            description="Support ethical business practices"
           />
         </div>
 
-        <div className="relative mb-12">
-          <div className="absolute inset-0 bg-gradient-to-r from-red-500/5 to-transparent dark:from-red-500/10" />
-          <div className="relative bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-gray-200/50 dark:border-gray-800/50">
-            <h2 className="text-xl md:text-2xl font-semibold mb-6 text-center bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600 dark:from-gray-100 dark:to-gray-400">
-              Did You Know?
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 text-center">
-              <Stat number="1.7M+" label="Jobs in Manufacturing" />
-              <Stat number="10%" label="of Canada's GDP" />
-              <Stat number="$354B" label="Annual Manufacturing Sales" />
-            </div>
+        <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 mb-12 shadow-lg">
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-8">
+            Canadian Manufacturing Impact
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 text-center">
+            <Stat 
+              number="1.7M+" 
+              label="Manufacturing Jobs" 
+            />
+            <Stat 
+              number="10%" 
+              label="of Canada's GDP" 
+            />
+            <Stat 
+              number="$354B" 
+              label="Annual Manufacturing Sales" 
+            />
           </div>
         </div>
 

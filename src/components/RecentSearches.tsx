@@ -5,11 +5,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import Link from "next/link"
 import { Locale } from "../i18n.config"
 
-interface RecentSearchesProps {
-  lang: Locale
-}
 
-export default function RecentSearches({ lang }: RecentSearchesProps) {
+
+export default function RecentSearches() {
   const [recentSearches, setRecentSearches] = useState<string[]>([])
 
   useEffect(() => {
@@ -32,7 +30,7 @@ export default function RecentSearches({ lang }: RecentSearchesProps) {
     <Card className="mt-8">
       <CardHeader>
         <CardTitle>
-          {lang === "fr" ? "Recherches Récentes" : "Recent Searches"}
+          Recent Searches
         </CardTitle>
       </CardHeader>
       <CardContent>
@@ -41,7 +39,7 @@ export default function RecentSearches({ lang }: RecentSearchesProps) {
             {recentSearches.map((search, index) => (
               <li key={index}>
                 <Link 
-                  href={`/${lang}/results?query=${encodeURIComponent(search)}`} 
+                  href={`/results?query=${encodeURIComponent(search)}`} 
                   className="text-blue-500 hover:underline"
                 >
                   {search}
@@ -51,7 +49,7 @@ export default function RecentSearches({ lang }: RecentSearchesProps) {
           </ul>
         ) : (
           <p className="text-gray-500">
-            {lang === "fr" ? "Aucune recherche récente" : "No recent searches"}
+            No recent searches
           </p>
         )}
       </CardContent>

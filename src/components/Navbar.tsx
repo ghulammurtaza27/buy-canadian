@@ -62,7 +62,6 @@ export default function Navbar() {
 
           <div className="flex items-center space-x-4">
             <div className="hidden sm:flex sm:items-center sm:space-x-2">
-              <LanguageToggle />
               <DarkModeToggle />
             </div>
             <div className="flex sm:hidden">

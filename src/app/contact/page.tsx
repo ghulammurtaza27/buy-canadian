@@ -3,16 +3,17 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Mail, Phone, MapPin } from "lucide-react"
+import PageLayout from "@/components/PageLayout"
 
 export default function ContactPage() {
   return (
-    <div className="container mx-auto px-4 py-12">
+    <PageLayout>
       <div className="max-w-4xl mx-auto">
+        <h1 className="text-4xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-red-600 to-red-500">
+          Contact Us
+        </h1>
         <div className="text-center mb-12">
           <Mail className="h-16 w-16 text-red-600 mx-auto mb-6" />
-          <h1 className="text-4xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-red-600 to-red-500 dark:from-red-500 dark:to-red-400">
-            Contact Us
-          </h1>
           <div className="h-1 w-20 mx-auto bg-gradient-to-r from-red-500 to-red-600 rounded-full mb-8" />
           <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             Have questions about Canadian products? Want to suggest improvements? We'd love to hear from you.
@@ -73,7 +74,7 @@ export default function ContactPage() {
           </form>
         </Card>
       </div>
-    </div>
+    </PageLayout>
   )
 }
 

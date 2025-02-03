@@ -1,9 +1,10 @@
 import { Card } from "@/components/ui/card"
 import { MapIcon as Maple } from "lucide-react"
+import PageLayout from "@/components/PageLayout"
 
-export default function AboutPage() {
+export default function About() {
   return (
-    <div className="container mx-auto px-4 py-12">
+    <PageLayout>
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
           <Maple className="h-16 w-16 text-red-600 mx-auto mb-6" />
@@ -49,7 +50,7 @@ export default function AboutPage() {
           </Card>
         </div>
       </div>
-    </div>
+    </PageLayout>
   )
 }
 
