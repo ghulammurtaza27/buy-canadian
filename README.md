@@ -1,6 +1,8 @@
-# Buy Canadian 🍁
+
 
 <div align="center">
+
+# Buy Canadian 🍁
 
 [![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://buy-canadian.vercel.app/)
 [![Next.js](https://img.shields.io/badge/Built%20with-Next.js%2014-black?style=for-the-badge&logo=next.js)](https://nextjs.org)
