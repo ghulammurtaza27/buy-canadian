@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Search, Barcode, Camera, Loader2 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import dynamic from "next/dynamic"
+import type { Locale } from '../i18n.config'
 
 const BarcodeScanner = dynamic(() => import("./BarcodeScanner"), { ssr: false })
 
@@ -21,12 +22,28 @@ const CANADA_US_FACTS = [
   "🏭 Over 60% of Canada's manufacturing is exported to the US"
 ]
 
-export default function ProductSearch() {
+interface ProductSearchProps {
+  lang: Locale
+}
+
+const MAX_RECENT_SEARCHES = 5
+
+export default function ProductSearch({ lang }: ProductSearchProps) {
   const [query, setQuery] = useState("")
   const [isScanning, setIsScanning] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [currentFact, setCurrentFact] = useState(0)
   const router = useRouter()
+
+  const saveToRecentSearches = (searchQuery: string) => {
+    const searches = JSON.parse(localStorage.getItem("recentSearches") || "[]")
+    const updatedSearches = [
+      searchQuery,
+      ...searches.filter((s: string) => s !== searchQuery)
+    ].slice(0, MAX_RECENT_SEARCHES)
+    
+    localStorage.setItem("recentSearches", JSON.stringify(updatedSearches))
+  }
 
   const handleScan = (data: string | null) => {
     if (data) {
@@ -41,15 +58,18 @@ export default function ProductSearch() {
     if (!query.trim()) return
     
     setIsLoading(true)
+    saveToRecentSearches(query.trim())
     // Start fact rotation
     const interval = setInterval(() => {
       setCurrentFact(prev => (prev + 1) % CANADA_US_FACTS.length)
     }, 3000)
     
-    router.push(`/results?query=${encodeURIComponent(query.trim())}`)
+    router.push(`/${lang}/results?query=${encodeURIComponent(query.trim())}`)
     
     // Cleanup interval if component unmounts
-    return () => clearInterval(interval)
+    return () => {
+      clearInterval(interval)
+    }
   }
 
   return (
@@ -62,10 +82,12 @@ export default function ProductSearch() {
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
               <Input
                 type="text"
-                placeholder="Enter product name or barcode"
+                placeholder={lang === "fr" ? "Rechercher des produits..." : "Search products..."}
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                className="pl-10 bg-white dark:bg-gray-900 transition-all duration-200"
+                className={cn(
+                  "pl-10 bg-white dark:bg-gray-900 transition-all duration-200",
+                )}
               />
             </div>
             <div className="flex gap-2">
@@ -73,10 +95,7 @@ export default function ProductSearch() {
                 {isLoading ? (
                   <Loader2 className="h-4 w-4 animate-spin" />
                 ) : (
-                  <>
-                    <Search className="w-4 h-4 mr-2" />
-                    Search
-                  </>
+                  <Search className="h-4 w-4" />
                 )}
               </Button>
               <Button
