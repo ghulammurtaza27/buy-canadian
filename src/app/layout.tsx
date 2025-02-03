@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar"
 import { Toaster } from "@/components/ui/toaster"
 import { LanguageProvider } from "@/contexts/LanguageContext"
 import type React from "react"
+import { Analytics } from '@vercel/analytics/react'
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -25,6 +26,7 @@ export default function RootLayout({
           <Navbar />
           <main className="min-h-screen bg-gradient-to-br from-red-50 via-white to-red-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 pt-16">
             {children}
+            <Analytics />
           </main>
           <Toaster />
         </LanguageProvider>

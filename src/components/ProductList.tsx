@@ -25,14 +25,14 @@ export default function ProductList({ products, query }: { products: any[]; quer
   }
 
   return (
-    <div className="grid gap-4">
+    <div className="grid gap-4 max-w-full">
       {products.map((product) => {
         const origin = getProductOrigin(product)
         return (
           <Link href={`/product/${product.code}?from=${encodeURIComponent(query || "")}`} key={product.code}>
             <Card className="overflow-hidden hover:shadow-md transition-shadow duration-200">
               <div className="p-4">
-                <div className="flex items-center gap-4">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
                   <div className="relative h-16 w-16 rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800 shrink-0">
                     {product.image_url ? (
                       <Image
@@ -45,19 +45,19 @@ export default function ProductList({ products, query }: { products: any[]; quer
                       <Package className="h-8 w-8 absolute inset-0 m-auto text-gray-400" />
                     )}
                   </div>
-                  <div className="flex-grow min-w-0">
-                    <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 truncate">
+                  <div className="flex-1 min-w-0 space-y-1">
+                    <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 break-words">
                       {product.product_name}
                     </h2>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">{product.brands}</p>
-                    <div className="flex items-center mt-1 text-sm text-gray-600 dark:text-gray-300">
+                    <p className="text-sm text-gray-500 dark:text-gray-400 break-words">{product.brands}</p>
+                    <div className="flex items-center text-sm text-gray-600 dark:text-gray-300">
                       <MapPin className="h-4 w-4 shrink-0 mr-1" />
                       <span className="truncate">{getPrimaryLocation(product)}</span>
                     </div>
                   </div>
                   <Badge
                     variant="outline"
-                    className={`ml-auto shrink-0 px-3 py-1 text-sm font-medium border ${getOriginStyles(origin)}`}
+                    className={`whitespace-nowrap mt-2 sm:mt-0 px-3 py-1 text-sm font-medium border ${getOriginStyles(origin)}`}
                   >
                     {origin}
                   </Badge>
