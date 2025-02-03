@@ -20,7 +20,6 @@ A web application helping consumers identify and support Canadian products.
 ## ✨ Features
 
 - 🔍 Smart Search - Find products and their origin instantly
-- 🌐 Bilingual - Full English and French language support
 - 🌙 Dark Mode - Easy on the eyes, day or night
 - 📱 Responsive - Perfect on desktop, tablet, and mobile
 - 🏭 Origin Tracking - Know where products are manufactured
@@ -33,17 +32,28 @@ In response to recent US tariffs, supporting Canadian products has never been mo
 
 ## 📊 Impact on Canadian Economy
 
-- 👥 1.7M+ Jobs in Manufacturing
-- 📈 10% of Canada's GDP
-- 💰 $354B Annual Manufacturing Sales
+<div align="center">
+
+| Metric | Value | Impact |
+|--------|--------|---------|
+| 👥 Manufacturing Jobs | **1.7M+** | Supporting local employment |
+| 📈 GDP Contribution | **10%** | Driving economic growth |
+| 💰 Annual Sales | **$354B** | Boosting Canadian business |
+
+</div>
 
 ## 🛠️ Tech Stack
 
-- Framework: Next.js 14 (App Router)
-- Language: TypeScript
-- Styling: TailwindCSS
-- Data: OpenFoodFacts API
-- Deployment: Vercel
+### Frontend
+- **Framework:** [Next.js 14](https://nextjs.org/) (App Router)
+- **Language:** [TypeScript](https://www.typescriptlang.org/)
+- **Styling:** [TailwindCSS](https://tailwindcss.com/)
+- **Components:** [Shadcn/ui](https://ui.shadcn.com/)
+
+### Backend & Data
+- **API:** [OpenFoodFacts](https://world.openfoodfacts.org/)
+- **Deployment:** [Vercel](https://vercel.com)
+- **Analytics:** [Vercel Analytics](https://vercel.com/analytics)
 
 ## 🌟 Getting Started
 
@@ -51,11 +61,11 @@ In response to recent US tariffs, supporting Canadian products has never been mo
 2. Install dependencies
 3. Run the development server
 
-## Clone the repository
+## 📦 Clone the repository
 git clone https://github.com/yourusername/buy-canadian.git
-## Install dependencies
+## ⚡ Install dependencies
 npm install
-## Start development server
+## 🚀 Start development server
 npm run dev
 
 ## 🤝 Contributing

@@ -82,7 +82,6 @@ export default function Navbar() {
                         </Link>
                       </div>
                       <div className="flex items-center space-x-2 mb-4">
-                        <LanguageToggle />
                         <DarkModeToggle />
                       </div>
                       <Button asChild variant="outline" className="w-full">
