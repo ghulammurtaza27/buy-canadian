@@ -1,5 +1,4 @@
 import { Suspense } from "react"
-import { notFound } from "next/navigation"
 import Link from "next/link"
 import ProductList from "../../components/ProductList"
 import LoadingSpinner from "../../components/LoadingSpinner"
@@ -7,17 +6,29 @@ import { Button } from "@/components/ui/button"
 import { ArrowLeft } from "lucide-react"
 import { Card } from "@/components/ui/card"
 
+interface Product {
+  code: string
+  product_name: string
+  brands: string
+  image_url?: string
+  ingredients_text?: string
+  labels?: string
+  ownership?: string
+  countries?: string
+  countries_tags?: string[]
+}
+
 async function getProductInfo(query: string) {
   try {
-    const response = await fetch(
-     `https://world.openfoodfacts.org/cgi/search.pl?search_terms=${encodeURIComponent(query)}&json=1&page_size=20&fields=product_name,code,brands,countries,countries_tags,image_url,ingredients_text,labels`,
-    {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        cache: "no-store",
-      }
-    )
+    // Add search tags and better filtering
+    const apiUrl = `http://localhost:3000/api/search?query=${encodeURIComponent(query)}&fields=product_name,code,brands,countries,countries_tags,image_url,ingredients_text,labels&tagtype_0=brands&tag_contains_0=contains&tag_0=${encodeURIComponent(query)}`
+    
+    const response = await fetch(apiUrl, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      next: { revalidate: 0 }
+    })
     
     if (!response.ok) {
       console.error(`API error: ${response.status} ${response.statusText}`)
@@ -32,12 +43,26 @@ async function getProductInfo(query: string) {
   }
 }
 
-type Props = {
-  params: any
-  searchParams: any
+interface PageProps {
+  searchParams: { [key: string]: string | string[] | undefined }
 }
 
-export default async function ResultsPage({ searchParams }: Props) {
+export default async function ResultsPage({ 
+  searchParams 
+}: PageProps) {
+  const query = searchParams?.query
+  const searchQuery = typeof query === 'string' ? decodeURIComponent(query) : ''
+
+  if (!searchQuery) {
+    return (
+      <div className="container mx-auto p-8">
+        <h1>No search query provided</h1>
+      </div>
+    )
+  }
+
+  const products = await getProductInfo(searchQuery)
+
   return (
     <Suspense
       fallback={
@@ -51,16 +76,12 @@ export default async function ResultsPage({ searchParams }: Props) {
         </div>
       }
     >
-      <Results query={searchParams.query} />
+      <Results products={products} query={searchQuery} />
     </Suspense>
   )
 }
 
-async function Results({ query }: { query?: string }) {
-  if (!query) return null
-
-  const products = await getProductInfo(query)
-  
+async function Results({ products, query }: { products: Product[], query: string }) {
   if (!products.length) {
     return (
       <div className="container mx-auto p-4">

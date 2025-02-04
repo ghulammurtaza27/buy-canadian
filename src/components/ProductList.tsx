@@ -7,7 +7,16 @@ import { Badge } from "@/components/ui/badge"
 import { MapPin, Package } from "lucide-react"
 import { getProductOrigin } from "../../utils/brand-utils"
 
-export default function ProductList({ products, query }: { products: any[]; query: string }) {
+interface Product {
+  code: string
+  product_name: string
+  brands: string
+  image_url?: string
+  ownership?: string
+  countries?: string
+}
+
+export default function ProductList({ products, query }: { products: Product[]; query: string }) {
   const getOriginStyles = (origin: string) => {
     switch (origin) {
       case "Owned by Canada":
@@ -19,7 +28,7 @@ export default function ProductList({ products, query }: { products: any[]; quer
     }
   }
 
-  const getPrimaryLocation = (product: any) => {
+  const getPrimaryLocation = (product: Product) => {
     if (!product.countries) return "Location unknown"
     return product.countries.split(",")[0].trim()
   }
@@ -36,8 +45,8 @@ export default function ProductList({ products, query }: { products: any[]; quer
                   <div className="relative h-16 w-16 rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800 shrink-0">
                     {product.image_url ? (
                       <Image
-                        src={product.image_url || "/placeholder.svg"}
-                        alt={product.product_name}
+                        src={product.image_url}
+                        alt={`Product image of ${product.product_name}`}
                         fill
                         className="object-cover"
                       />

@@ -1112,6 +1112,41 @@ const AMERICAN_PARENT_COMPANIES = {
   // More brands coming in next message...
 };
 
+const CANADIAN_PARENT_COMPANIES = {
+  // Restaurant/Cafe brands
+  "second-cup": "second-cup",
+  "tim-hortons": "tim-hortons",
+  "swiss-chalet": "recipe-unlimited",
+  "harveys": "recipe-unlimited",
+  "st-hubert": "recipe-unlimited",
+  
+  // Grocery/Food brands
+  "presidents-choice": "loblaws",
+  "no-name": "loblaws",
+  "great-value-canada": "loblaws",
+  "compliments": "sobeys",
+  "selection": "metro",
+  "irresistibles": "metro",
+  
+  // Food Manufacturers
+  "maple-leaf-foods": "maple-leaf",
+  "schneiders": "maple-leaf",
+  "saputo": "saputo",
+  "armstrong": "saputo",
+  "dairyland": "saputo",
+  "neilson": "saputo",
+  "baxter": "saputo",
+  
+  // Beverage Companies
+  "cott": "cott",
+  "canada-dry-canada": "canada-dry",
+  
+  // Snack/Confectionery
+  "dare-foods": "dare",
+  "leclerc": "leclerc",
+  "covered-bridge": "covered-bridge",
+  "hawkins-cheezies": "hawkins",
+}
 
 export function isAmericanBrand(brandName: string): boolean {
   if (!brandName) return false
@@ -1125,17 +1160,36 @@ export function isAmericanBrand(brandName: string): boolean {
   )
 }
 
+export function isCanadianBrand(brandName: string): boolean {
+  if (!brandName) return false
+
+  // Convert brand name to lowercase and remove special characters
+  const normalizedBrand = brandName.toLowerCase().replace(/[^a-z0-9]/g, "")
+
+  // Check if the brand is in our mapping
+  return Object.keys(CANADIAN_PARENT_COMPANIES).some((brand) =>
+    normalizedBrand.includes(brand.replace(/[^a-z0-9]/g, "")),
+  )
+}
+
 export function getProductOrigin(product: any): string {
-  // Check if the product is from a known American brand
-  if (product.brands && isAmericanBrand(product.brands)) {
+  if (!product.brands) return "Origin unknown"
+
+  // Check for known Canadian brands first
+  if (isCanadianBrand(product.brands)) {
+    return "Owned by Canada"
+  }
+
+  // Then check for known American brands
+  if (isAmericanBrand(product.brands)) {
     return "Owned by US"
   }
 
-  // Check country tags
+  // If no brand match, check country tags
   if (product.countries_tags?.includes("en:canada")) {
-    return "Owned by Canada"
+    return "Made in Canada"
   } else if (product.countries_tags?.includes("en:united-states")) {
-    return "Owned by US"
+    return "Made in US"
   }
 
   // If no matches found

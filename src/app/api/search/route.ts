@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { getProductOrigin } from '../../../../utils/brand-utils'
 
 export const maxDuration = 59
 export const dynamic = 'force-dynamic'
@@ -12,7 +13,11 @@ async function fetchWithFallback(url: string): Promise<Response> {
   const cacheKey = url
   const cached = cache.get(cacheKey)
   if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
-    return new Response(JSON.stringify({ products: cached.data }))
+    const productsWithOwnership = cached.data.map((product: any) => ({
+      ...product,
+      ownership: getProductOrigin(product)
+    }))
+    return new Response(JSON.stringify({ products: productsWithOwnership }))
   }
 
   try {
@@ -32,24 +37,34 @@ async function fetchWithFallback(url: string): Promise<Response> {
 
     const data = await response.json()
     
+    // Add ownership to products before caching
+    const productsWithOwnership = data.products.map((product: any) => ({
+      ...product,
+      ownership: getProductOrigin(product)
+    }))
+    
     // Cache the successful response
     cache.set(cacheKey, {
-      data: data.products,
+      data: productsWithOwnership,
       timestamp: Date.now()
     })
 
-    return response
+    return new Response(JSON.stringify({ products: productsWithOwnership }))
   } catch (primaryError) {
     console.error('Primary API error:', primaryError)
 
     // If we have stale cache, use it
     if (cached) {
       console.log('Using stale cache data')
-      return new Response(JSON.stringify({ products: cached.data, fromCache: true }))
+      const productsWithOwnership = cached.data.map((product: any) => ({
+        ...product,
+        ownership: getProductOrigin(product)
+      }))
+      return new Response(JSON.stringify({ products: productsWithOwnership, fromCache: true }))
     }
 
     // Fallback to a more reliable endpoint or simplified search
-    const fallbackUrl = `https://world.openfoodfacts.org/api/v2/search?query=${encodeURIComponent(url.split('search_terms=')[1].split('&')[0])}&fields=product_name,code,brands`
+    const fallbackUrl = `https://world.openfoodfacts.org/api/v2/search?query=${encodeURIComponent(url.split('search_terms=')[1].split('&')[0])}&fields=product_name,code,brands,countries,countries_tags`
     
     try {
       const fallbackResponse = await fetch(fallbackUrl, {
@@ -61,7 +76,13 @@ async function fetchWithFallback(url: string): Promise<Response> {
         throw new Error('Fallback API also failed')
       }
 
-      return fallbackResponse
+      const fallbackData = await fallbackResponse.json()
+      const productsWithOwnership = fallbackData.products.map((product: any) => ({
+        ...product,
+        ownership: getProductOrigin(product)
+      }))
+
+      return new Response(JSON.stringify({ products: productsWithOwnership }))
     } catch (fallbackError) {
       console.error('Fallback API error:', fallbackError)
       throw new Error('All API attempts failed')
@@ -78,7 +99,8 @@ export async function GET(request: Request) {
       return NextResponse.json({ products: [] })
     }
 
-    const apiUrl = `https://world.openfoodfacts.net/cgi/search.pl?search_terms=${encodeURIComponent(query)}&json=1&page_size=24&fields=product_name,code,brands,countries,countries_tags,image_url,ingredients_text,labels`
+    // Update the API URL to better match brand names
+    const apiUrl = `https://world.openfoodfacts.org/cgi/search.pl?search_terms=${encodeURIComponent(query)}&search_simple=1&action=process&json=1&fields=product_name,code,brands,countries,countries_tags,image_url,ingredients_text,labels&tagtype_0=brands&tag_contains_0=contains&tag_0=${encodeURIComponent(query)}`
     
     const response = await fetchWithFallback(apiUrl)
     const data = await response.json()
