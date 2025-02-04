@@ -3,7 +3,9 @@ import type { Metadata } from "next"
 import { Card, CardContent } from "../components/ui/card"
 import ProductSearch from "../components/ProductSearch"
 import RecentSearches from "../components/RecentSearches"
-import { MapPin, ShoppingBag, HeartHandshake, MapIcon as Maple } from "lucide-react"
+import { MapPin, ShoppingBag, HeartHandshake, ArrowRight } from "lucide-react"
+import { HeroSection } from "@/components/HeroSection"
+import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = {
   title: 'Buy Canadian',
@@ -13,73 +15,68 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-red-50 via-white to-red-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_110%)]" />
-      <main className="relative container mx-auto px-4 py-12">
-        <div className="text-center mb-12 max-w-4xl mx-auto">
-          <div className="mb-6 relative">
-            <div className="absolute inset-0 flex items-center justify-center filter blur-sm opacity-50">
-              <Maple className="h-24 w-24 text-red-600/50" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] opacity-50" />
+      <main className="relative">
+        <HeroSection />
+
+        <div className="container mx-auto px-4">
+          <Card className="max-w-2xl mx-auto mb-24 shadow-xl hover:shadow-2xl transition-all duration-300 border-0 bg-white/70 dark:bg-gray-900/70 backdrop-blur-sm">
+            <CardContent className="p-6 md:p-8">
+              <ProductSearch />
+            </CardContent>
+          </Card>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-24">
+            <FeatureCard
+              icon={<MapPin className="w-6 h-6" />}
+              title="Local Support"
+              description="Support Canadian businesses and manufacturers"
+              className="from-red-500/10 via-red-500/5 to-transparent"
+            />
+            <FeatureCard
+              icon={<ShoppingBag className="w-6 h-6" />}
+              title="Quality Products"
+              description="Find high-quality Canadian-made goods"
+              className="from-blue-500/10 via-blue-500/5 to-transparent"
+            />
+            <FeatureCard
+              icon={<HeartHandshake className="w-6 h-6" />}
+              title="Fair Trade"
+              description="Support ethical business practices"
+              className="from-green-500/10 via-green-500/5 to-transparent"
+            />
+          </div>
+
+          <div className="relative overflow-hidden rounded-3xl bg-white dark:bg-gray-900 p-12 mb-24 shadow-xl">
+            <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 via-transparent to-transparent dark:from-red-500/10" />
+            <div className="relative">
+              <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-red-600 to-red-500 dark:from-red-500 dark:to-red-400">
+                Canadian Manufacturing Impact
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+                <Stat 
+                  number="1.7M+" 
+                  label="Manufacturing Jobs"
+                  trend="+5% YoY"
+                />
+                <Stat 
+                  number="10%" 
+                  label="of Canada's GDP"
+                  trend="Growing"
+                />
+                <Stat 
+                  number="$354B" 
+                  label="Annual Manufacturing Sales"
+                  trend="+8.2% YoY"
+                />
+              </div>
             </div>
-            <Maple className="h-24 w-24 text-red-600 mx-auto relative" />
           </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-red-600 to-red-500 dark:from-red-500 dark:to-red-400">
-            Buy Canadian
-          </h1>
-          <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-4">
-            Support local businesses and make informed shopping choices
-          </p>
-          <div className="h-px w-40 mx-auto bg-gradient-to-r from-transparent via-red-200 dark:via-red-800 to-transparent mb-4" />
-          <p className="text-base md:text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
-            In response to recent US tariffs, it's more important than ever to support Canadian products and strengthen
-            our economy.
-          </p>
-        </div>
 
-        <Card className="max-w-2xl mx-auto mb-12 shadow-lg">
-          <CardContent className="p-4 md:p-6">
-            <ProductSearch />
-          </CardContent>
-        </Card>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 mb-12">
-          <FeatureCard
-            icon={<MapPin className="w-6 h-6" />}
-            title="Local Support"
-            description="Support Canadian businesses and manufacturers"
-          />
-          <FeatureCard
-            icon={<ShoppingBag className="w-6 h-6" />}
-            title="Quality Products"
-            description="Find high-quality Canadian-made goods"
-          />
-          <FeatureCard
-            icon={<HeartHandshake className="w-6 h-6" />}
-            title="Fair Trade"
-            description="Support ethical business practices"
-          />
-        </div>
-
-        <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 mb-12 shadow-lg">
-          <h2 className="text-2xl md:text-3xl font-bold text-center mb-8">
-            Canadian Manufacturing Impact
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 text-center">
-            <Stat 
-              number="1.7M+" 
-              label="Manufacturing Jobs" 
-            />
-            <Stat 
-              number="10%" 
-              label="of Canada's GDP" 
-            />
-            <Stat 
-              number="$354B" 
-              label="Annual Manufacturing Sales" 
-            />
+          <div className="mb-24">
+            <RecentSearches />
           </div>
         </div>
-
-        <RecentSearches />
       </main>
     </div>
   )
@@ -89,28 +86,52 @@ function FeatureCard({
   icon,
   title,
   description,
+  className,
 }: {
   icon: React.ReactNode
   title: string
   description: string
+  className?: string
 }) {
   return (
-    <div className="group relative overflow-hidden rounded-2xl bg-white dark:bg-gray-900 p-6 md:p-8 transition-all hover:shadow-xl hover:-translate-y-1">
-      <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 via-transparent to-transparent dark:from-red-500/10" />
-      <div className="relative">
-        <div className="mb-4 inline-flex p-3 rounded-xl bg-red-50 dark:bg-red-500/10 text-red-500">{icon}</div>
-        <h3 className="text-lg md:text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">{title}</h3>
-        <p className="text-sm md:text-base text-gray-600 dark:text-gray-400">{description}</p>
+    <div className="group relative overflow-hidden rounded-3xl bg-white/70 dark:bg-gray-900/70 backdrop-blur-sm p-8 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+      <div className={cn("absolute inset-0 bg-gradient-to-br transition-opacity duration-300 group-hover:opacity-100", className)} />
+      <div className="relative space-y-4">
+        <div className="inline-flex p-3 rounded-xl bg-gradient-to-br from-red-50 to-red-100 dark:from-red-500/20 dark:to-red-500/10 text-red-500 ring-1 ring-red-100 dark:ring-red-500/20">
+          {icon}
+        </div>
+        <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100">{title}</h3>
+        <p className="text-gray-600 dark:text-gray-400 leading-relaxed">{description}</p>
+        <div className="pt-2 flex items-center text-red-500 font-medium">
+          Learn more <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+        </div>
       </div>
     </div>
   )
 }
 
-function Stat({ number, label }: { number: string; label: string }) {
+function Stat({ 
+  number, 
+  label, 
+  trend 
+}: { 
+  number: string
+  label: string
+  trend?: string
+}) {
   return (
-    <div className="space-y-2">
-      <div className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-100">{number}</div>
-      <div className="text-sm text-gray-600 dark:text-gray-400">{label}</div>
+    <div className="relative group p-6 rounded-2xl bg-gradient-to-br from-red-50 to-transparent dark:from-red-500/5 transition-all duration-300 hover:shadow-lg">
+      <div className="space-y-2">
+        <div className="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-700 dark:from-gray-100 dark:to-gray-300">
+          {number}
+        </div>
+        <div className="text-sm font-medium text-gray-600 dark:text-gray-400">{label}</div>
+        {trend && (
+          <div className="text-sm font-medium text-green-600 dark:text-green-400 flex items-center gap-1">
+            {trend}
+          </div>
+        )}
+      </div>
     </div>
   )
 }
